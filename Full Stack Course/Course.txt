@@ -1,0 +1,27 @@
+Python Full Stack course
+
+
+=========================
+
+
+commands
+
+source venv/bin/activate    
+to activate venv
+
+deactivate
+to exit venv
+
+pip freeze > requirements.txt
+To save dependencies
+
+pip install -r requirements.txt
+To install dependencies from requirements.txt
+
+
+{% block content %}
+{% endblock %}
+Create a block in base html
+
+{{ self.content() }}
+To call the block again
