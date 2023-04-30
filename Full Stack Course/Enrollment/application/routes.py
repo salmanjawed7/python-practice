@@ -3,7 +3,9 @@ from enum import unique
 import mimetypes
 from urllib import request
 from application import app, db
-from flask import render_template, request, json, Response
+from flask import render_template, request, json, Response, redirect, flash
+
+from application.forms import LoginForm, RegisterForm
 from application.models import User, Course, Enrollment
 
 courseData = [
@@ -23,9 +25,17 @@ def index():
     return render_template("index.html", index=True)
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    return render_template("login.html", login=True)
+    form = LoginForm()
+    if form.validate_on_submit():
+        if request.form.get("email") == "test@uta.com":
+            flash("You are successfully logged in")
+            return redirect("/index")
+        else:
+            flash("Sorry try again")
+
+    return render_template("login.html", title="Login", form=form, login=True)
 
 
 @app.route("/courses/")
